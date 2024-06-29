@@ -1,0 +1,22 @@
+{
+  "name": "vite-plugin-solid-fsr",
+  "main": "index.js",
+  "type": "module",
+  "devDependencies": {
+    "micromatch": "^4.0.7",
+    "vite": "^5.3.1"
+  },
+  "dependencies": {
+    "es-module-lexer": "^1.5.4",
+    "esbuild": "^0.21.5",
+    "fast-glob": "^3.3.2",
+    "pathe": "^1.1.2"
+  },
+  "peerDependencies": {
+    "vite": "^4 || ^5"
+  },
+  "exports": {
+    ".": "./index.js",
+    "./routes": "./routes.js"
+  }
+}
