@@ -1,7 +1,5 @@
-import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { relative } from 'pathe';
-import { normalizePath } from 'vite';
+import { normalize, relative, resolve } from 'pathe';
 import { SolidStartClientFileRouter } from './solid-start/fs-router.js';
 import { treeShake } from './vinxi/tree-shake.js';
 
@@ -19,7 +17,7 @@ import { treeShake } from './vinxi/tree-shake.js';
  * @returns { import('vite').Plugin }
  */
 export default function routes(options) {
-	const routesPath = normalizePath(fileURLToPath(new URL("vinxi/routes.js", import.meta.url)));
+	const routesPath = normalize(fileURLToPath(new URL("vinxi/routes.js", import.meta.url)));
 	let isBuild;
 	/** @type {import("./vinxi/fs-router.js").BaseFileSystemRouter} */
 	let router;
@@ -31,7 +29,7 @@ export default function routes(options) {
 				isBuild = config.command === "build";
 				root = config.root;
 				router = options?.router || new SolidStartClientFileRouter({
-					dir: normalizePath(options?.dir ? path.resolve(config.root, options.dir) : path.resolve(config.root, 'src', 'routes')),
+					dir: options?.dir ? resolve(config.root, options.dir) : resolve(config.root, 'src', 'routes'),
 					extensions: options?.extensions || ['jsx', 'tsx'],
 				});
 			},
