@@ -1,16 +1,22 @@
+import path from "node:path";
 import { defineConfig } from "vite";
 import solid from "vite-plugin-solid";
-import routes from "vite-plugin-solid-fsr";
-import { fileURLToPath } from "node:url";
+import solidFSR from "vite-plugin-solid-fsr";
 
 export default defineConfig({
+  server: {
+    port: 3000,
+  },
+  build: {
+    minify: false,
+  },
   resolve: {
     alias: {
-      "~": fileURLToPath(new URL("./src", import.meta.url)),
+      "~": path.join(__dirname, "src"),
     },
   },
   plugins: [
-    solid(),
-    routes(),
+    solid({ extensions: [".jsx", ".tsx"] }),
+    solidFSR(),
   ]
 });

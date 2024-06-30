@@ -2,7 +2,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { relative } from 'pathe';
 import { normalizePath } from 'vite';
-import { SolidStartClientFileRouter } from './solid/fs-router.js';
+import { SolidStartClientFileRouter } from './solid-start/fs-router.js';
 import { treeShake } from './vinxi/tree-shake.js';
 
 /**
@@ -10,7 +10,7 @@ import { treeShake } from './vinxi/tree-shake.js';
  * @typedef {Object} Options
  * @property {string} [dir]
  * @property {string[]} [extensions]
- * @property {import("./vinxi-fsr").BaseFileSystemRouter} [router] - If passed dir and extensions will be ignored.
+ * @property {import("./vinxi/fs-router.js").BaseFileSystemRouter} [router] - If passed dir and extensions will be ignored.
  */
 
 /**
@@ -21,7 +21,7 @@ import { treeShake } from './vinxi/tree-shake.js';
 export default function routes(options) {
 	const routesPath = normalizePath(fileURLToPath(new URL("vinxi/routes.js", import.meta.url)));
 	let isBuild;
-	/** @type {import("./vinxi-fsr").BaseFileSystemRouter} */
+	/** @type {import("./vinxi/fs-router.js").BaseFileSystemRouter} */
 	let router;
 	let root;
 	return [
@@ -32,7 +32,7 @@ export default function routes(options) {
 				root = config.root;
 				router = options?.router || new SolidStartClientFileRouter({
 					dir: normalizePath(options?.dir ? path.resolve(config.root, options.dir) : path.resolve(config.root, 'src', 'routes')),
-					extensions: ['jsx', 'tsx'],
+					extensions: options?.extensions || ['jsx', 'tsx'],
 				});
 			},
 			configureServer(server) {
@@ -82,12 +82,12 @@ export default function routes(options) {
 							return {
 								src: isBuild ? relative(root, buildId) : buildId,
 								build: isBuild
-									? `_$() => import(/* @vite-ignore */ '${buildId}')$_`
+									? `_$() => import('${buildId}')$_`
 									: undefined,
 								import: `_$(() => { const id = '${relative(
 									root,
 									buildId,
-								)}'; return import(/* @vite-ignore */ '${isBuild ? buildId : "/@fs/" + buildId}') })$_`,
+								)}'; return import('${isBuild ? buildId : "/@fs/" + buildId}') })$_`,
 							};
 						}
 						return v;
