@@ -2,10 +2,8 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { relative } from 'pathe';
 import { normalizePath } from 'vite';
-import { SolidStartClientFileRouter } from './solid-start-fsr.js';
-import { treeShake } from './tree-shake.js';
-
-export { BaseFileSystemRouter } from "./vinxi-fsr.js";
+import { SolidStartClientFileRouter } from './solid/fs-router.js';
+import { treeShake } from './vinxi/tree-shake.js';
 
 /**
  * Options for the solid file system router plugin.
@@ -21,7 +19,7 @@ export { BaseFileSystemRouter } from "./vinxi-fsr.js";
  * @returns { import('vite').Plugin }
  */
 export default function routes(options) {
-	const routesPath = normalizePath(fileURLToPath(new URL("routes.js", import.meta.url)));
+	const routesPath = normalizePath(fileURLToPath(new URL("vinxi/routes.js", import.meta.url)));
 	let isBuild;
 	/** @type {import("./vinxi-fsr").BaseFileSystemRouter} */
 	let router;

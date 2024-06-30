@@ -1,7 +1,7 @@
 import { MetaProvider, Title } from "@solidjs/meta";
 import { Router } from "@solidjs/router";
 import { Suspense, onMount } from "solid-js";
-import routes from "vite-plugin-solid-fsr/routes";
+import routes from "vite-plugin-solid-fsr/vinxi/routes";
 import "./app.css";
 
 export default function App() {

@@ -19,6 +19,7 @@
   },
   "exports": {
     ".": "./index.js",
-    "./routes": "./routes.js"
+    "./vinxi/routes": "./vinxi/routes.js",
+    "./vinxi/fs-router": "./vinxi/fs-router.js"
   }
 }
