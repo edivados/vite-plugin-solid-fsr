@@ -3,9 +3,11 @@
   "main": "index.js",
   "type": "module",
   "devDependencies": {
+    "@types/micromatch": "^4.0.9",
     "vite": "^5.3.1"
   },
   "dependencies": {
+    "@babel/core": "^7.24.7",
     "es-module-lexer": "^1.5.4",
     "esbuild": "^0.21.5",
     "fast-glob": "^3.3.2",

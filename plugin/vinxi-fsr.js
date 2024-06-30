@@ -54,7 +54,6 @@ export class BaseFileSystemRouter extends EventTarget {
 	/**
 	 *
 	 * @param {FileSystemRouterConfig} config
-	 * @param {import("./router-mode").Router<any>} router
 	 */
 	constructor(config) {
 		super();
@@ -128,11 +127,6 @@ export class BaseFileSystemRouter extends EventTarget {
 	}
 
 	/**
-	 * To be attached by vite plugin to the vite dev server
-	 */
-	update = undefined;
-
-	/**
 	 *
 	 * @param {Route} route
 	 */
@@ -191,7 +185,6 @@ export class BaseFileSystemRouter extends EventTarget {
 			} catch (e) {
 				console.error(e);
 			}
-			// this.update?.();
 		}
 	}
 
@@ -201,6 +194,7 @@ export class BaseFileSystemRouter extends EventTarget {
 	 * @returns
 	 */
 	removeRoute(src) {
+		console.log("remove", src);
 		src = normalize(src);
 		if (this.isRoute(src)) {
 			const path = this.toPath(src);

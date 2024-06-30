@@ -1,5 +1,9 @@
 import { Title } from "@solidjs/meta";
 
+export function route() {
+  return {}
+}
+
 export default function Home() {
   return (
     <main>
