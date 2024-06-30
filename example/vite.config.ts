@@ -7,9 +7,6 @@ export default defineConfig({
   server: {
     port: 3000,
   },
-  build: {
-    minify: false,
-  },
   resolve: {
     alias: {
       "~": path.join(__dirname, "src"),
